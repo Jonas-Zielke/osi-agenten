@@ -62,11 +62,12 @@
 /* Abzeichen-Regal */
 .badges { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; margin-top: 14px; }
 .badge { padding: 14px 10px; text-align: center; border: 2px solid var(--gold); border-radius: var(--r); background: var(--surface); box-shadow: 0 4px 0 var(--gold-edge); animation: pop-rein .4s var(--feder) both; animation-delay: calc(var(--i, 0) * 30ms); }
-.badge .ic { display: grid; place-items: center; width: 58px; height: 58px; margin: 0 auto 6px; border-radius: 50%; background: var(--gold-soft); font-size: 1.8rem; }
+.badge .abz { display: block; width: 92px; height: 92px; margin: -6px auto 4px; transition: transform var(--mittel) var(--feder); }
+.badge:not(.off):hover .abz { transform: translateY(-3px) rotate(-6deg) scale(1.06); }
 .badge .bn { font-weight: 900; font-size: .92rem; }
 .badge .bd { font-size: .78rem; color: var(--muted); }
 .badge.off { border-color: var(--line); box-shadow: 0 4px 0 var(--line); }
-.badge.off .ic { background: var(--locked); filter: grayscale(1); opacity: .5; }
+.badge.off .abz { filter: grayscale(1); opacity: .4; }
 .badge.off .bn { color: var(--muted); }
 .challenge-karte { text-align: center; }
 .challenge-icon { font-size: 3.4rem; animation: wackel 2.5s ease-in-out infinite; }

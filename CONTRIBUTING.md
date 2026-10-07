@@ -33,6 +33,7 @@ Diese Datei ist die verbindliche Grundlage für alle Beiträge, von Menschen wie
 
 ## Aufbau
 - `spiel/` – das Spiel selbst. Klassische Skripte ohne Build-Schritt und ohne Module, Ladereihenfolge in `spiel/index.html`.
+  - `content/meta.js`: Version, Figuren der Story, Ränge, Abzeichen (je Abzeichen `form`, `farbe` und `motiv` für das SVG), Challenge, Einsatzliste (je Einsatz `farbe` und `icon` für die Karte)
   - `content/inhalte.js`: Inhaltsverzeichnis – die einzige Liste der geladenen Inhaltsdateien (Spiel, Einsatzzentrale, Lösungs-PDF und Tests lesen sie)
   - `content/meta.js`: Version, Figuren der Story, Ränge, Abzeichen, Challenge, Einsatzliste (je Einsatz `farbe` und `icon` für die Karte)
   - `content/api.js`: Helfer für Inhaltsdateien (`OSI.schritte`, `OSI.challengeBegriffe`, `OSI.L` …) und die Inhaltsprüfung `OSI.pruefen()`
@@ -43,6 +44,7 @@ Diese Datei ist die verbindliche Grundlage für alle Beiträge, von Menschen wie
     - `util.js`, `theme.js` (Hell/Dunkel), `audio.js`, `fx.js` (Animationen, beachtet „Bewegung reduzieren“)
     - `progress.js`: Fortschritt, Punkte, Ränge und die „Front“ (nächster offener Schritt) als reine Funktionen
     - `avatars.js`: die 15 Spielfiguren als selbst gezeichnetes SVG
+    - `abzeichen.js`: die Abzeichen als selbst gezeichnetes SVG (Form je Art, Farbe als Token, ein Motiv je Abzeichen)
     - `map.js`: Kletterkarten – `welt` (Station je Einsatz, im Spiel senkrecht, in der Zentrale waagerecht), `pfad` (Schritte eines Einsatzes) und `spalten` (alle Schritte als Türme), Figuren mit Lauf-Animation
   - `js/game/` – das Spiel (`window.OSIGame`): `core.js` (Zustand, Punkte, Übungsmodus, Navigation), `shell.js` (Kopfleiste, Dialoge, Lehrkraft-Modus), `screens.js` (Start, Karte, Schritt-Rahmen), `main.js` (Router, Tastatur)
   - `js/steps/` – Renderer der Schritt-Typen: `common.js` (gemeinsame Bausteine), `story.js` (story, lesson, sealed), `quiz.js` (quiz mit mc/layer/pick/multi/eingabe/meldung, anklage), `sort.js` (sort, kapsel), `verhoer.js`, `ende.js` (ende, urkunde), `interaktiv.js` (eigene Interaktionen aus den Inhalten)

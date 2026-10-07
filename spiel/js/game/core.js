@@ -176,7 +176,7 @@
     G.save.badges[id] = now();
     persist();
     A.play('abzeichen');
-    toast(`<span class="toast-medaille">${b.icon}</span><div><b>Abzeichen: ${esc(b.name)}</b><br>${esc(b.text)}</div>`, 5000, 'medaille');
+    toast(`<span class="toast-medaille">${Kit.abzeichen.svg(b)}</span><div><b>Abzeichen: ${esc(b.name)}</b><br>${esc(b.text)}</div>`, 5000, 'medaille');
   }
 
   // ---------------------------------------------------------------- Struktur & Navigation

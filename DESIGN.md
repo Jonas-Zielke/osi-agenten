@@ -120,6 +120,7 @@ Das Spiel erarbeitet das OSI-Modell an einem durchgehenden Fall. Es deckt keine 
   - Fehlerfrei und ohne Tipp = ⭐ „gemeistert“, 5× ⭐ = Abzeichen „Trainingsfleißig“.
   - Gespeichert in `save.uebung`.
 - Ränge als neutrale „Freigabestufen“, Abzeichen (auch geheime), Verdächtigen-Board mit Stempeln, Codenamen.
+- **Abzeichen** als selbst gezeichnete SVG im Stil der Oberfläche (flach, 3D-Kante, Glanzlicht). Die Form zeigt die Art: Medaille mit Band = Einsatz abgeschlossen (Farbe des Einsatzes), Wappenschild mit Stern = ohne Tipp, Sechseck = Training/Challenge, Siegel = geheim (noch nicht gefunden: grau mit Fragezeichen). Nicht erreichte sind grau. Zu sehen im Regal, im Toast und auf der gedruckten Urkunde.
 - **Kletterkarten** statt Aktenliste, immer von unten nach oben (bottom-up wie die Ermittlung):
   - **Weltkarte:** eine Station je Einsatz in seiner Schichtfarbe (`farbe`/`icon` in `meta.js`) mit goldenem Fortschrittsring. Die Figur steht an der Station des aktuellen Einsatzes.
   - **Pfad je Einsatz:** jeder Schritt ein Knoten, Bonus-Akten neben dem Pfad. Die Figur steht an der „Front“, dem ersten offenen Pflicht-Schritt.

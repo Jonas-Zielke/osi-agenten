@@ -2,7 +2,7 @@
 (function () {
   'use strict';
   const G = window.OSIGame, OSI = window.OSI, S = window.OSIStore, A = window.OSIAudio, Kit = window.OSIKit;
-  const P = Kit.progress, AV = Kit.avatars, MAP = Kit.map;
+  const P = Kit.progress, AV = Kit.avatars, MAP = Kit.map, ABZ = Kit.abzeichen;
   const { esc, $, $$ } = Kit.util;
   const app = () => $('#app');
 
@@ -305,7 +305,7 @@
       <div class="fortschritt gold"><i style="width:${Math.round(n / b.length * 100)}%"></i></div>
       <div class="badges">${b.map((x, i) => {
         const hat = !!G.save.badges[x.id], geheim = x.geheim && !hat;
-        return `<div class="badge ${hat ? '' : 'off'}" style="--i:${i}" title="${esc(geheim ? 'Geheimes Abzeichen' : x.text)}"><div class="ic">${geheim ? '❔' : x.icon}</div><div class="bn">${esc(geheim ? '???' : x.name)}</div><div class="bd">${esc(geheim ? 'Geheimes Abzeichen' : x.text)}</div></div>`;
+        return `<div class="badge ${hat ? '' : 'off'}" style="--i:${i}" title="${esc(geheim ? 'Geheimes Abzeichen' : x.text)}">${ABZ.svg(x, { geheim })}<div class="bn">${esc(geheim ? '???' : x.name)}</div><div class="bd">${esc(geheim ? 'Geheimes Abzeichen' : x.text)}</div></div>`;
       }).join('')}</div></div>`;
   }
 

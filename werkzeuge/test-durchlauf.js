@@ -125,9 +125,24 @@ const { browser, seite, klick, sleep, shot } = require('./lib');
   }
   await sleep(200);
   await page.screenshot({ path: shot('zz_uebersicht'), fullPage: true });
-  const s = await page.evaluate(() => ({ punkte: OSIGame.punkte(), rang: OSIGame.rang().r.name, geloest: Object.values(OSIGame.save.items).filter(i => i.ok).length, gesamt: OSIStore.alleItems(OSI).length, schritte: Object.keys(OSIGame.save.steps).length, abzeichen: Object.keys(OSIGame.save.badges) }));
+  const s = await page.evaluate(() => ({ punkte: OSIGame.punkte(), rang: OSIGame.rang().r.name, geloest: Object.values(OSIGame.save.items).filter(i => i.ok).length, gesamt: OSIStore.alleItems(OSI).length, schritte: Object.keys(OSIGame.save.steps).length, abzeichen: Object.keys(OSIGame.save.badges), abzeichenGesamt: OSI.abzeichen.length }));
   console.log(`Einsätze: ${einsaetze.join(', ')} · Punkte ${s.punkte} (${s.rang}) · Aufgaben ${s.geloest}/${s.gesamt} · Schritte ${s.schritte} · Abzeichen ${s.abzeichen.join(', ')}`);
   if (s.geloest !== s.gesamt) fehler.push(`Nicht alle Aufgaben gelöst: ${s.geloest}/${s.gesamt}`);
+  // Abzeichen: jedes hat Form und Motiv aus dem Baukasten (kein Emoji-Ersatz), das Regal zeigt alle als SVG
+  await page.evaluate(() => { OSIGame.zurKarte(); document.querySelector('.hub-tab[data-tab="abzeichen"]').click(); }); await sleep(600);
+  const abz = await page.evaluate(() => {
+    const A = OSIKit.abzeichen;
+    return {
+      ohneMotiv: OSI.abzeichen.filter(b => !A.formen.includes(b.form) || !A.motive.includes(b.motiv)).map(b => b.id),
+      svg: document.querySelectorAll('.badge svg.abz').length, emoji: document.querySelectorAll('.badge svg.abz text').length,
+      verdeckt: [...document.querySelectorAll('.badge.off')].filter(x => x.textContent.includes('???')).length,
+      geheimOffen: OSI.abzeichen.filter(b => b.geheim && !OSIGame.save.badges[b.id]).length
+    };
+  });
+  if (abz.ohneMotiv.length) fehler.push('Abzeichen ohne bekannte Form oder bekanntes Motiv: ' + abz.ohneMotiv.join(', '));
+  if (abz.svg !== s.abzeichenGesamt || abz.emoji) fehler.push(`Abzeichen-Regal zeigt ${abz.svg} SVGs (${abz.emoji} mit Emoji) für ${s.abzeichenGesamt} Abzeichen`);
+  if (abz.verdeckt !== abz.geheimOffen) fehler.push(`${abz.verdeckt} verdeckte statt ${abz.geheimOffen} noch nicht gefundener geheimer Abzeichen`);
+  await page.screenshot({ path: shot('zz_abzeichen'), fullPage: true });
   const rt = await page.evaluate(() => { const t = OSIStore.encode(OSIGame.save); const r = OSIStore.decode(t); const bad = OSIStore.decode(t.slice(0, -2) + 'xx'); return { ok: r.ok && JSON.stringify(r.save) === JSON.stringify(OSIGame.save), badAbgelehnt: !bad.ok }; });
   if (!rt.ok) fehler.push('Export/Import liefert nicht denselben Spielstand');
   if (!rt.badAbgelehnt) fehler.push('Manipulierte Datei wurde NICHT abgelehnt');
