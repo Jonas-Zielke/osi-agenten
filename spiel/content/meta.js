@@ -78,21 +78,46 @@ window.OSI = {
     sekunden: 60,
     freiNach: 'e0-sort-switch',
     abzeichen: [{ id: 'speed-15', ab: 15 }, { id: 'speed-25', ab: 25 }],
+    // Begriff → Schicht. Nur Inhalte, die das Spiel vermittelt (Vorgeschmack auf spätere Einsätze erlaubt),
+    // nichts, was laut Mindestanforderungen nur angeteasert wird (WLAN, TLS, VLAN, NAT, Firewall). Je Begriff genau eine Schicht.
+    // Weitere Begriffe können Inhaltsdateien mit OSI.challengeBegriffe([...]) ergänzen (siehe docs/inhalte.md).
     pool: [
-      { t: 'Switch', l: 2 }, { t: 'Router', l: 3 }, { t: 'Hub', l: 1 }, { t: 'Repeater', l: 1 }, { t: 'L3-Switch', l: 3 },
-      { t: 'MAC-Adresse', l: 2 }, { t: 'IP-Adresse', l: 3 }, { t: 'Portnummer', l: 4 }, { t: 'TCP', l: 4 }, { t: 'UDP', l: 4 },
+      // L1 · Bitübertragung
+      { t: 'Hub', l: 1 }, { t: 'Repeater', l: 1 }, { t: 'Bits', l: 1 }, { t: 'Patchkabel', l: 1 }, { t: 'RJ45-Stecker', l: 1 },
+      { t: 'Glasfaser', l: 1 }, { t: 'Funkwellen', l: 1 }, { t: 'Spannung auf der Leitung', l: 1 }, { t: 'Lichtimpulse', l: 1 },
+      { t: 'Medienkonverter', l: 1 }, { t: 'Patchfeld', l: 1 },
+      { t: 'Link-LED', l: 1 }, { t: 'Kabeltester', l: 1 }, { t: 'Netzwerkdose', l: 1 }, { t: 'Lichtwellenleiter (LWL)', l: 1 },
+      { t: 'Kupferkabel', l: 1 }, { t: 'Singlemode-Faser', l: 1 }, { t: 'Multimode-Faser', l: 1 }, { t: 'Switch-Port 23', l: 1 },
+      { t: '100 Mbit/s am Port', l: 1 }, { t: 'Elektromagnetische Störung', l: 1 },
+      // L2 · Sicherung
+      { t: 'Switch', l: 2 }, { t: 'MAC-Adresse', l: 2 }, { t: 'Frame', l: 2 }, { t: 'Ethernet-Header', l: 2 },
+      { t: 'Ethernet-Trailer (FCS)', l: 2 }, { t: 'MAC-Adresstabelle', l: 2 }, { t: 'dc:a6:32:5e:19:7a', l: 2 },
+      { t: 'ARP', l: 2 }, { t: 'arp -a', l: 2 }, { t: 'ARP-Cache', l: 2 }, { t: 'ARP-Spoofing', l: 2 }, { t: 'OUI (Herstellerkennung)', l: 2 },
+      { t: 'ff:ff:ff:ff:ff:ff', l: 2 }, { t: 'Ziel-MAC im Frame', l: 2 }, { t: 'Ethernet', l: 2 }, { t: '00:15:5d:0a:32:14', l: 2 },
+      // L3 · Vermittlung
+      { t: 'Router', l: 3 }, { t: 'L3-Switch', l: 3 }, { t: 'IP-Adresse', l: 3 }, { t: 'Paket', l: 3 }, { t: 'Subnetzmaske', l: 3 },
+      { t: 'Standardgateway', l: 3 }, { t: 'Routing-Tabelle', l: 3 }, { t: '192.168.50.10', l: 3 },
+      { t: 'ping', l: 3 }, { t: 'tracert', l: 3 }, { t: 'ipconfig', l: 3 }, { t: 'route print', l: 3 }, { t: 'Hop', l: 3 },
+      { t: 'TTL', l: 3 }, { t: 'Netzanteil', l: 3 }, { t: '255.255.255.0', l: 3 }, { t: '192.168.50.66', l: 3 },
+      { t: '198.51.100.23', l: 3 }, { t: 'Standardroute 0.0.0.0', l: 3 }, { t: 'IPv4', l: 3 },
+      // L4 · Transport
+      { t: 'Portnummer', l: 4 }, { t: 'TCP', l: 4 }, { t: 'UDP', l: 4 }, { t: 'Segment', l: 4 }, { t: 'Datagramm', l: 4 },
+      { t: 'Port 443', l: 4 }, { t: 'Port 53', l: 4 }, { t: '3-Wege-Handshake', l: 4 }, { t: 'SYN, ACK', l: 4 },
+      { t: 'Port 22', l: 4 }, { t: 'Port 80', l: 4 },
+      { t: 'netstat', l: 4 }, { t: 'Socket (IP + Port)', l: 4 }, { t: 'Quellport', l: 4 }, { t: 'UDP-Port 67', l: 4 }, { t: 'Port 3389', l: 4 },
+      { t: 'Bekannte Ports 0–1023', l: 4 }, { t: 'Dynamische Ports', l: 4 }, { t: 'SYN', l: 4 }, { t: 'RST, ACK', l: 4 },
+      { t: 'FIN', l: 4 }, { t: 'Portscan', l: 4 },
+      // L5 · Sitzung
+      { t: 'Sitzung auf-/abbauen', l: 5 }, { t: 'Sitzungs-ID (Cookie)', l: 5 }, { t: 'Anmelden / Abmelden', l: 5 },
+      { t: 'Angemeldet bleiben', l: 5 }, { t: 'Sitzung läuft ab', l: 5 }, { t: 'Sitzungs-ID ungültig machen', l: 5 }, { t: 'Alle Sitzungen beenden', l: 5 },
+      // L6 · Darstellung
+      { t: 'Zeichenkodierung UTF-8', l: 6 }, { t: 'Bildformat JPEG', l: 6 }, { t: 'Verschlüsselung', l: 6 }, { t: 'ASCII', l: 6 },
+      { t: 'URL-Kodierung %40', l: 6 }, { t: 'Kompression', l: 6 }, { t: '„Ã¼“ statt „ü“', l: 6 }, { t: 'ü = Bytes C3 BC', l: 6 },
+      // L7 · Anwendung
       { t: 'HTTP', l: 7 }, { t: 'HTTPS', l: 7 }, { t: 'DNS', l: 7 }, { t: 'DHCP', l: 7 }, { t: 'SMTP (E-Mail)', l: 7 },
-      { t: 'Frame', l: 2 }, { t: 'Paket', l: 3 }, { t: 'Segment', l: 4 }, { t: 'Datagramm', l: 4 }, { t: 'Bits', l: 1 },
-      { t: 'Patchkabel', l: 1 }, { t: 'RJ45-Stecker', l: 1 }, { t: 'Glasfaser', l: 1 }, { t: 'Funkwellen', l: 1 },
-      { t: 'Subnetzmaske', l: 3 }, { t: 'Standardgateway', l: 3 }, { t: 'Ethernet-Header', l: 2 }, { t: 'Ethernet-Trailer (FCS)', l: 2 },
-      { t: 'Zeichenkodierung UTF-8', l: 6 }, { t: 'Bildformat JPEG', l: 6 }, { t: 'Sitzung auf-/abbauen', l: 5 },
-      { t: 'Port 443', l: 4 }, { t: 'Port 53', l: 4 }, { t: 'Routing-Tabelle', l: 3 }, { t: 'MAC-Adresstabelle', l: 2 },
-      { t: 'Spannung auf der Leitung', l: 1 }, { t: 'Lichtimpulse', l: 1 }, { t: 'Webbrowser-Protokoll', l: 7 },
-      { t: '192.168.50.10', l: 3 }, { t: 'dc:a6:32:5e:19:7a', l: 2 }, { t: 'Medienkonverter', l: 1 }, { t: 'Patchfeld', l: 1 },
-      { t: '3-Wege-Handshake', l: 4 }, { t: 'SYN, ACK', l: 4 }, { t: 'Port 22', l: 4 }, { t: 'Port 80', l: 4 },
-      { t: 'SSH', l: 7 }, { t: 'HTTP-POST', l: 7 }, { t: 'DNS-Antwort', l: 7 }, { t: 'Statuscode 404', l: 7 },
-      { t: 'Sitzungs-ID (Cookie)', l: 5 }, { t: 'Anmelden / Abmelden', l: 5 },
-      { t: 'Verschlüsselung', l: 6 }, { t: 'ASCII', l: 6 }, { t: 'URL-Kodierung %40', l: 6 }
+      { t: 'Webbrowser-Protokoll', l: 7 }, { t: 'SSH', l: 7 }, { t: 'HTTP-POST', l: 7 }, { t: 'DNS-Antwort', l: 7 }, { t: 'Statuscode 404', l: 7 },
+      { t: 'nslookup', l: 7 }, { t: 'Statuscode 200', l: 7 }, { t: 'HTTP-GET', l: 7 }, { t: 'DHCP-Discover', l: 7 }, { t: 'DHCP-Offer', l: 7 },
+      { t: 'DHCP-Lease', l: 7 }, { t: 'lohn.fo-logistik.intern', l: 7 }, { t: 'HTTP-Anfrage (Request)', l: 7 }, { t: 'Seite ohne Schloss (HTTP)', l: 7 }
     ]
   },
 

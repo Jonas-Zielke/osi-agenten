@@ -18,6 +18,7 @@
       dekodiere: v => q.layer ? 'L' + v : q.pick ? 'Klick: ' + v : q.meldung ? 'Frame ' + v : q.eingabe ? '„' + v + '“' : q.multi ? String(v).split('+').map(i => strip(q.optionen[i])).join(' + ') : strip((q.optionen || [])[v] || v)
     })));
     (st.items || []).forEach(it => katalog.push(Object.assign({}, base, { id: it.id, titel: st.titel + ': ' + it.text, dekodiere: v => { const b = (st.bins || []).find(b => String(b.id) === String(v)); return b ? (b.kurz || b.label) : v; } })));
+    (st.aufgaben || []).forEach(a => katalog.push(Object.assign({}, base, { id: a.id, titel: st.titel + ': ' + strip(a.text), dekodiere: v => a.werte && a.werte[v] != null ? strip(String(a.werte[v])) : String(v) })));
     (st.phasen || []).forEach(ph => katalog.push(Object.assign({}, base, { id: ph.id, titel: st.titel + ': ' + strip(ph.titel), dekodiere: v => { const o = ph.optionen.find(o => o.key === v); return o ? strip(o.label) + ' (zu früh)' : v; } })));
   }));
 
