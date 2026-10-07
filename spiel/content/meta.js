@@ -80,40 +80,33 @@ window.OSI = {
     sekunden: 60,
     freiNach: 'e0-sort-switch',
     abzeichen: [{ id: 'speed-15', ab: 15 }, { id: 'speed-25', ab: 25 }],
-    // Begriff → Schicht. Grundwissen statt Spezialwissen: Kernbegriffe aus der Grundausbildung (E0) und dem
-    // Agenten-Handbuch, die Befehle der Fehler-Triage, typische Geräte, Protokolle und Ports. Je Begriff genau eine Schicht,
-    // nichts, was laut Mindestanforderungen nur angeteasert wird. Regeln: docs/inhalte.md.
-    // Weitere Begriffe können Inhaltsdateien mit OSI.challengeBegriffe([...]) ergänzen.
+    // Begriff → Schicht. Nur EINZELNE Fachbegriffe aus dem Grundwissen (ein Wort wie Hub, TCP, MAC-Adresse):
+    // keine Sätze, keine Adressen, Werte oder Portnummern, nichts, was nur angeteasert wird. Je Begriff genau eine Schicht.
+    // Regeln: docs/inhalte.md. Weitere Begriffe können Inhaltsdateien mit OSI.challengeBegriffe([...]) ergänzen.
     pool: [
       // L1 · Bitübertragung
       { t: 'Hub', l: 1 }, { t: 'Repeater', l: 1 }, { t: 'Bits', l: 1 }, { t: 'Patchkabel', l: 1 }, { t: 'RJ45-Stecker', l: 1 },
-      { t: 'Glasfaser', l: 1 }, { t: 'Funkwellen', l: 1 }, { t: 'Spannung auf der Leitung', l: 1 }, { t: 'Lichtimpulse', l: 1 },
-      { t: 'Medienkonverter', l: 1 }, { t: 'Patchfeld', l: 1 },
-      { t: 'Link-LED', l: 1 }, { t: 'Kabeltester', l: 1 }, { t: 'Netzwerkdose', l: 1 }, { t: 'Kupferkabel', l: 1 },
-      { t: 'Signale übertragen', l: 1 },
+      { t: 'Glasfaser', l: 1 }, { t: 'Funkwellen', l: 1 }, { t: 'Lichtimpulse', l: 1 }, { t: 'Spannung', l: 1 },
+      { t: 'Medienkonverter', l: 1 }, { t: 'Patchfeld', l: 1 }, { t: 'Link-LED', l: 1 }, { t: 'Kabeltester', l: 1 },
+      { t: 'Netzwerkdose', l: 1 }, { t: 'Kupferkabel', l: 1 },
       // L2 · Sicherung
-      { t: 'Switch', l: 2 }, { t: 'MAC-Adresse', l: 2 }, { t: 'Frame', l: 2 }, { t: 'Ethernet-Header', l: 2 },
-      { t: 'Ethernet-Trailer (FCS)', l: 2 }, { t: 'MAC-Adresstabelle', l: 2 }, { t: 'dc:a6:32:5e:19:7a', l: 2 },
-      { t: 'ARP', l: 2 }, { t: 'Ethernet', l: 2 }, { t: 'Physische Adresse', l: 2 }, { t: 'Zustellung im selben Netz', l: 2 },
+      { t: 'Switch', l: 2 }, { t: 'MAC-Adresse', l: 2 }, { t: 'Frame', l: 2 }, { t: 'Ethernet', l: 2 },
+      { t: 'Ethernet-Header', l: 2 }, { t: 'Ethernet-Trailer', l: 2 }, { t: 'MAC-Adresstabelle', l: 2 }, { t: 'ARP', l: 2 },
       // L3 · Vermittlung
-      { t: 'Router', l: 3 }, { t: 'L3-Switch', l: 3 }, { t: 'IP-Adresse', l: 3 }, { t: 'Paket', l: 3 }, { t: 'Subnetzmaske', l: 3 },
-      { t: 'Standardgateway', l: 3 }, { t: 'Routing-Tabelle', l: 3 }, { t: '192.168.50.10', l: 3 },
-      { t: 'ping', l: 3 }, { t: 'ipconfig', l: 3 }, { t: 'IPv4', l: 3 }, { t: 'Logische Adresse', l: 3 },
-      { t: 'Weg durch mehrere Netze', l: 3 },
+      { t: 'Router', l: 3 }, { t: 'L3-Switch', l: 3 }, { t: 'IP-Adresse', l: 3 }, { t: 'IPv4', l: 3 }, { t: 'Paket', l: 3 },
+      { t: 'Subnetzmaske', l: 3 }, { t: 'Standardgateway', l: 3 }, { t: 'Routing', l: 3 }, { t: 'Routing-Tabelle', l: 3 },
+      { t: 'ping', l: 3 }, { t: 'ipconfig', l: 3 },
       // L4 · Transport
-      { t: 'Portnummer', l: 4 }, { t: 'TCP', l: 4 }, { t: 'UDP', l: 4 }, { t: 'Segment', l: 4 }, { t: 'Datagramm', l: 4 },
-      { t: 'Port 443', l: 4 }, { t: 'Port 53', l: 4 }, { t: '3-Wege-Handshake', l: 4 }, { t: 'SYN, ACK', l: 4 },
-      { t: 'Port 22', l: 4 }, { t: 'Port 80', l: 4 }, { t: 'Ende-zu-Ende-Transport', l: 4 },
+      { t: 'TCP', l: 4 }, { t: 'UDP', l: 4 }, { t: 'Portnummer', l: 4 }, { t: 'Segment', l: 4 }, { t: 'Datagramm', l: 4 },
+      { t: '3-Wege-Handshake', l: 4 },
       // L5 · Sitzung
-      { t: 'Sitzung auf-/abbauen', l: 5 }, { t: 'Sitzungs-ID (Cookie)', l: 5 }, { t: 'Anmelden / Abmelden', l: 5 },
-      { t: 'Angemeldet bleiben', l: 5 },
+      { t: 'Sitzung', l: 5 }, { t: 'Sitzungs-ID', l: 5 }, { t: 'Anmeldung', l: 5 }, { t: 'Abmeldung', l: 5 },
       // L6 · Darstellung
-      { t: 'Zeichenkodierung UTF-8', l: 6 }, { t: 'Bildformat JPEG', l: 6 }, { t: 'Verschlüsselung', l: 6 }, { t: 'ASCII', l: 6 },
-      { t: 'URL-Kodierung %40', l: 6 }, { t: 'Kompression', l: 6 }, { t: 'Daten umwandeln', l: 6 },
+      { t: 'Zeichenkodierung', l: 6 }, { t: 'UTF-8', l: 6 }, { t: 'ASCII', l: 6 }, { t: 'JPEG', l: 6 },
+      { t: 'Verschlüsselung', l: 6 }, { t: 'Kompression', l: 6 },
       // L7 · Anwendung
-      { t: 'HTTP', l: 7 }, { t: 'HTTPS', l: 7 }, { t: 'DNS', l: 7 }, { t: 'DHCP', l: 7 }, { t: 'SMTP (E-Mail)', l: 7 },
-      { t: 'Webbrowser-Protokoll', l: 7 }, { t: 'SSH', l: 7 }, { t: 'HTTP-POST', l: 7 }, { t: 'DNS-Antwort', l: 7 }, { t: 'Statuscode 404', l: 7 },
-      { t: 'nslookup', l: 7 }, { t: 'HTTP-GET', l: 7 }, { t: 'Namensauflösung', l: 7 }, { t: 'Dienste für Programme', l: 7 }
+      { t: 'HTTP', l: 7 }, { t: 'HTTPS', l: 7 }, { t: 'DNS', l: 7 }, { t: 'DHCP', l: 7 }, { t: 'SMTP', l: 7 },
+      { t: 'SSH', l: 7 }, { t: 'Browser', l: 7 }, { t: 'nslookup', l: 7 }, { t: 'Namensauflösung', l: 7 }
     ]
   },
 
