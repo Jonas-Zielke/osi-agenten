@@ -84,16 +84,16 @@ Regeln aus DESIGN.md:
 ## Zeit-Challenge
 Die Begriffe stehen in `meta.js` unter `challenge.pool`, nach Schichten gegliedert, je Eintrag `{ t: 'Begriff', l: 1–7 }`. Ergänzen lassen sie sich dort direkt oder aus einer Inhaltsdatei mit `OSI.challengeBegriffe([...])`.
 
-- **Grundwissen statt Spezialwissen:** Die Challenge ist schnelles Wiederholen, kein Expertenquiz. Hinein gehören:
-  - Kernbegriffe aus der Grundausbildung (E0) und dem Agenten-Handbuch (Aufgabe, Geräte, Adressen, PDUs je Schicht)
-  - die Befehle der Fehler-Triage
-  - bekannte Protokolle und Ports
+- **Nur einzelne Fachbegriffe:** ein Wort oder ein zusammengesetzter Fachbegriff wie `Hub`, `TCP`, `MAC-Adresse`, `Subnetzmaske`, `Sitzung`, `UTF-8`, höchstens 20 Zeichen.
+- **Nicht hinein gehören:**
+  - Sätze und Umschreibungen („Weg durch mehrere Netze“)
+  - Adressen und Werte („192.168.50.10“, „Port 443“)
+  - Beispiele aus dem Fall
+  - Detailwissen (TCP-Flags, Portbereiche, DHCP-Nachrichten, Glasfaser-Arten)
 
-  Nicht hinein gehören Detailwissen aus späteren Einsätzen (TCP-Flags, Portbereiche, DHCP-Nachrichten, Glasfaser-Arten) und konkrete Werte aus dem Fall, die man nur mit Fallkenntnis zuordnen kann.
-- **Kurz:** höchstens 30 Zeichen. Er muss in einer Sekunde lesbar sein.
-- **Eindeutig:** genau eine Schicht, ohne Diskussion. TLS (L5 oder L6) gehört deshalb nicht hinein.
-- **Gelernt:** nur, was das Spiel vermittelt. Was laut Mindestanforderungen nur angeteasert wird, kommt nicht hinein (WLAN, VLAN, NAT, Firewall, TLS im Detail).
-- **Im Stil der vorhandenen Begriffe:** Gerät, Adresse, Protokoll, Befehl oder Aufgabe einer Schicht (`Link-LED`, `Physische Adresse`, `ping`, `Port 443`, `Daten umwandeln`).
+  Die Inhaltsprüfung lehnt Begriffe mit Leerzeichen ab.
+- **Grundwissen:** Kernbegriffe aus der Grundausbildung (E0) und dem Agenten-Handbuch, die Befehle der Fehler-Triage und bekannte Protokolle. Was laut Mindestanforderungen nur angeteasert wird, kommt nicht hinein (WLAN, VLAN, NAT, Firewall, TLS).
+- **Eindeutig:** genau eine Schicht, ohne Diskussion.
 
 ## Interaktive Schritte (`type: 'interaktiv'`)
 Für alles, was die Standard-Typen nicht können: Teile anklicken, zusammensetzen, verschieben, eine kleine Simulation. Der Inhalt baut seine Oberfläche selbst, den Rest übernimmt das Spiel:

@@ -25,8 +25,8 @@ probe.schritte('e0', [
   { id: 'probe-quiz', type: 'quiz', titel: 'x', fragen: [{ id: 'probe-f', frage: 'x', optionen: ['a', 'b'], richtig: 2 }] },
   { id: 'probe-ia', type: 'interaktiv', titel: 'x', aufgaben: [] }
 ]);
-probe.challengeBegriffe([{ t: 'Switch', l: 2 }, { t: 'Neu', l: 9 }]);
-const erwartet = ['Schritt-id „' + erste.id + '“ gibt es schon', 'unbekannter Schritt-Typ', 'richtig zeigt nicht auf', 'braucht eine Funktion start', 'Begriff doppelt', 'Schicht l muss'];
+probe.challengeBegriffe([{ t: 'Switch', l: 2 }, { t: 'Neu', l: 9 }, { t: 'Port 443', l: 4 }]);
+const erwartet = ['Schritt-id „' + erste.id + '“ gibt es schon', 'unbekannter Schritt-Typ', 'richtig zeigt nicht auf', 'braucht eine Funktion start', 'Begriff doppelt', 'Schicht l muss', 'nur einzelne Fachbegriffe'];
 const gemeldet = probe.pruefen().join('\n');
 erwartet.forEach(t => { if (!gemeldet.includes(t)) fehler.push(`Prüfung erkennt nicht: ${t}`); });
 let wirft = false;

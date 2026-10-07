@@ -109,7 +109,7 @@
     (C.pool || []).forEach((b, i) => {
       const wo = `Challenge › ${b && b.t ? b.t : 'Eintrag ' + (i + 1)}`;
       if (!b || typeof b.t !== 'string' || !b.t.trim()) return melde(wo, 'Begriff ohne Text (t)');
-      if (b.t.length > 30) melde(wo, 'Begriff zu lang (höchstens 30 Zeichen, sonst ist er in Sekunden nicht lesbar)');
+      if (/\s/.test(b.t.trim()) || b.t.length > 20) melde(wo, 'nur einzelne Fachbegriffe (ein Wort wie „Hub“ oder „MAC-Adresse“, höchstens 20 Zeichen) – keine Sätze oder Werte');
       if (!Number.isInteger(b.l) || b.l < 1 || b.l > 7) melde(wo, 'Schicht l muss eine Zahl von 1 bis 7 sein');
       const k = b.t.trim().toLowerCase();
       if (begriffe.has(k)) melde(wo, 'Begriff doppelt');

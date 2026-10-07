@@ -26,7 +26,7 @@ Was sich für Lernende, Lehrkräfte und Mitwirkende geändert hat. Ältere Spiel
 - **Neue Anzeigen**, ohne Punkte und ohne Druck:
   - Kombo-Hinweis bei richtigen Antworten in Folge
   - Tages-Flamme für heute erledigte Schritte
-- **Zeit-Challenge:** 77 statt 55 Begriffe, alle aus dem Grundwissen (Grundausbildung, Agenten-Handbuch, Triage-Befehle, bekannte Protokolle und Ports).
+- **Zeit-Challenge:** nur noch einzelne Fachbegriffe aus dem Grundwissen (59 Begriffe wie Hub, TCP, MAC-Adresse, Subnetzmaske, UTF-8). Sätze, Adressen, Werte und Portnummern sind raus.
 
 ### Für Lehrkräfte
 - **Einsatzzentrale mit Karten-Reiter:**
