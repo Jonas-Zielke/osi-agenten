@@ -54,7 +54,7 @@
       <div class="db-rang">${esc(d.rang)}</div>
       <div class="db-klein">verliehen.</div>
       <div class="db-werte"><div><b>${d.punkte}</b><span>Punkte</span></div><div><b>${d.akten}</b><span>Akten aufgeklärt</span></div><div><b>${d.abzeichen.length}</b><span>Abzeichen</span></div></div>
-      <div class="db-abz">${d.abzeichen.map(b => `<span>${b.icon} ${esc(b.name)}</span>`).join('')}</div>
+      <div class="db-abz">${d.abzeichen.map(b => `<span>${Kit.abzeichen.svg(b)}${esc(b.name)}</span>`).join('')}</div>
       <div class="db-fuss"><div><div class="db-unterschrift">${esc(d.datum)}</div><span>Datum</span></div><div class="db-siegel">E7</div><div><div class="db-unterschrift"><i>Albers</i></div><span>Direktorin Albers, Einheit 7</span></div></div>
     </div>`;
     document.body.appendChild(el);

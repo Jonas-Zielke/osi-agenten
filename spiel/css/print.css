@@ -20,7 +20,9 @@
   .db-werte { display: flex; gap: 16mm; }
   .db-werte b { display: block; font-size: 18pt; }
   .db-werte span { font-size: 9.5pt; color: #6b4a1a; }
-  .db-abz { display: flex; flex-wrap: wrap; justify-content: center; gap: 2mm 6mm; font-size: 10pt; color: #4a3a22; max-width: 160mm; }
+  .db-abz { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5mm 5mm; font-size: 9.5pt; color: #4a3a22; max-width: 160mm; }
+  .db-abz span { display: inline-flex; align-items: center; gap: 1.2mm; }
+  .db-abz .abz { width: 8mm; height: 8mm; flex: none; }
   .db-fuss { width: 100%; display: flex; justify-content: space-between; align-items: flex-end; }
   .db-fuss > div:not(.db-siegel) { width: 55mm; }
   .db-fuss span { font-size: 9pt; color: #6b4a1a; }
