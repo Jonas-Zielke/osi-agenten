@@ -57,7 +57,7 @@ Im Spiel unten auf „Lehrkraft“ klicken oder **Strg + Alt + L** drücken. Das
 - Updates sind spielstandsicher: Neue Versionen laden alte Spielstände weiter.
 
 ## Anpassen und mitmachen
-Fehler gefunden, Ideen für neue Einsätze oder eine Anpassung für eure Lerngruppe? Issues und Pull Requests sind willkommen. Die Spielregeln für Beiträge (z. B. „IDs nie ändern“) stehen in [CONTRIBUTING.md](CONTRIBUTING.md), die Designentscheidungen in [DESIGN.md](DESIGN.md).
+Fehler gefunden, Ideen für neue Einsätze oder eine Anpassung für eure Lerngruppe? Issues und Pull Requests sind willkommen. Die Spielregeln für Beiträge (z. B. „IDs nie ändern“) stehen in [CONTRIBUTING.md](CONTRIBUTING.md), die Designentscheidungen in [DESIGN.md](DESIGN.md). Was sich zwischen den Versionen geändert hat, steht in [CHANGELOG.md](CHANGELOG.md).
 
 ## Lizenz
 - **Code** (`spiel/js/`, `werkzeuge/`, Startseite): [MIT](LICENSE.md#code-mit)
