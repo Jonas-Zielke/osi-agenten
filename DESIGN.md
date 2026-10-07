@@ -114,7 +114,7 @@ Das Spiel erarbeitet das OSI-Modell an einem durchgehenden Fall. Es deckt keine 
 ## Gamification
 - Punkte: 1. Versuch voll, dann 50/30/20 %, je Tipp −20 %, nie 0. Kein Game Over, kein Zeitdruck außer in der freiwilligen Zeit-Challenge.
 - Zeit-Challenge: Nach einem Fehler steht die Uhr 2,5 s. Es läuft nur ein Durchgang gleichzeitig. Angezeigt wird „Richtige“. Begriffe aus späteren Einsätzen sind als Vorgeschmack erlaubt.
-  - Je Begriff genau eine Schicht und höchstens 30 Zeichen. Nichts, was nur angeteasert wird. Regeln in [`docs/inhalte.md`](docs/inhalte.md).
+  - **Grundwissen statt Spezialwissen:** Kernbegriffe aus E0 und dem Handbuch, Triage-Befehle, bekannte Protokolle und Ports. Je Begriff genau eine Schicht und höchstens 30 Zeichen. Nichts, was nur angeteasert wird. Regeln in [`docs/inhalte.md`](docs/inhalte.md).
 - „Nochmal üben“ für erledigte Fragen-, Sortier- und Puzzle-Schritte:
   - Der erste Durchgang bleibt maßgeblich, Übung gibt und kostet keine Punkte.
   - Fehlerfrei und ohne Tipp = ⭐ „gemeistert“, 5× ⭐ = Abzeichen „Trainingsfleißig“.
