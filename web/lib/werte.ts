@@ -5,6 +5,9 @@ import { BENUTZERNAME } from './auth-optionen.mjs';
 export const normName = (s: unknown) => String(s ?? '').trim().toLowerCase();
 export const gueltigerName = (s: string) => BENUTZERNAME.test(s);
 export const gueltigesPasswort = (s: unknown) => typeof s === 'string' && s.length >= 8 && s.length <= 128;
+// wie im Spiel: Codename höchstens 24 Zeichen, Figuren a01 … a15
+export const normCodename = (s: unknown) => String(s ?? '').replace(/[\u0000-\u001f\u007f]/g, '').trim().slice(0, 24);
+export const gueltigeFigur = (s: unknown) => typeof s === 'string' && /^a(0[1-9]|1[0-5])$/.test(s);
 
 const WOERTER = ['FALKE', 'KABEL', 'PAKET', 'ROUTER', 'SWITCH', 'FRAME', 'PORT', 'LOTSE', 'RADAR', 'SIGNAL', 'ANKER', 'TANKER'];
 const ZEICHEN = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789'; // ohne 0/O, 1/I/L

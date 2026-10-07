@@ -22,15 +22,29 @@ async function speichern(req: Request) {
   const p = pruefeSpielstand(roh);
   if (!p) return fehler(400, 'Das sieht nicht wie ein Spielstand aus.');
   // Online gehört der Spielstand immer zum angemeldeten Konto
-  (p.daten.duo as Record<string, unknown>).agenten = [b.username];
+  const duo = p.daten.duo as Record<string, unknown>;
+  duo.agenten = [b.username];
+  // Hat die Lehrkraft Codename oder Figur geändert, gilt das, bis das Spiel es mitschickt (dann ist die Vorgabe erledigt –
+  // aber nur genau diese: eine neue Änderung, die gerade dazwischenkam, bleibt stehen)
+  const [alt] = await abfrage<{ vorgabe: { codename?: string; avatar?: string } | null }>('select vorgabe from spielstand where user_id = $1', [b.id]);
+  let vorgabe = alt?.vorgabe ?? null;
+  if (vorgabe) {
+    const v = vorgabe;
+    if ((v.codename == null || duo.codename === v.codename) && (v.avatar == null || duo.avatar === v.avatar)) vorgabe = null;
+    else {
+      if (v.codename != null) duo.codename = p.meta.codename = v.codename;
+      if (v.avatar != null) duo.avatar = p.meta.avatar = v.avatar;
+    }
+  }
   await pool.query(
     `insert into spielstand (user_id, daten, version, codename, avatar, punkte, front, fall, aktualisiert)
      values ($1, $2, $3, $4, $5, $6, $7, $8, now())
      on conflict (user_id) do update set daten = excluded.daten, version = excluded.version, codename = excluded.codename,
-       avatar = excluded.avatar, punkte = excluded.punkte, front = excluded.front, fall = excluded.fall, aktualisiert = now()`,
-    [b.id, p.daten, String(p.daten.version ?? ''), p.meta.codename, p.meta.avatar, p.meta.punkte, p.meta.front, p.meta.fall]
+       avatar = excluded.avatar, punkte = excluded.punkte, front = excluded.front, fall = excluded.fall, aktualisiert = now(),
+       vorgabe = case when spielstand.vorgabe = $9::jsonb then null else spielstand.vorgabe end`,
+    [b.id, p.daten, String(p.daten.version ?? ''), p.meta.codename, p.meta.avatar, p.meta.punkte, p.meta.front, p.meta.fall, alt?.vorgabe && !vorgabe ? JSON.stringify(alt.vorgabe) : null]
   );
-  return Response.json({ ok: true });
+  return Response.json(vorgabe ? { ok: true, vorgabe } : { ok: true });
 }
 export const PUT = speichern;
 export const POST = speichern;

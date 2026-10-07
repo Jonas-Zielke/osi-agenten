@@ -2,9 +2,9 @@
 // Zeigt Spielfiguren aus spiel/js/kit/avatars.js (dasselbe SVG wie im Spiel)
 import { useEffect, useState } from 'react';
 
-type Kit = { avatars: { svg: (id: string, opt?: { titel?: boolean; pose?: string }) => string } };
+type Kit = { avatars: { svg: (id: string, opt?: { titel?: boolean; pose?: string }) => string; liste: { id: string; name: string }[] } };
 let laden: Promise<Kit> | null = null;
-function kit(): Promise<Kit> {
+export function kit(): Promise<Kit> {
   const w = window as unknown as { OSIKit?: Kit };
   if (w.OSIKit?.avatars) return Promise.resolve(w.OSIKit);
   return laden ??= new Promise(ok => {

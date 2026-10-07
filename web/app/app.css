@@ -20,3 +20,9 @@
 .held-online .start-parade { position: static; justify-content: center; }
 @media (max-width: 760px) { .held-online { grid-template-columns: 1fr; } }
 .fuss a { margin: 0 6px; }
+.t .rl-figur { display: inline-block; width: 26px; vertical-align: middle; margin-right: 6px; }
+.dialog-bearbeiten { width: min(640px, calc(100% - 32px)); max-height: calc(100vh - 32px); overflow: auto; color: var(--text); padding: 22px; }
+.dialog-bearbeiten::backdrop { background: var(--backdrop); }
+.dialog-bearbeiten h3 { margin-top: 0; }
+.dialog-bearbeiten .av-picker { margin-top: 6px; }
+.t td.nowrap { white-space: nowrap; }

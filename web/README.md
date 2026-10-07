@@ -6,7 +6,7 @@ Das Spiel selbst ist **derselbe Code wie die Lite-Version** in [`../spiel`](../s
 | Rolle | kann |
 |---|---|
 | Lernende | registrieren sich mit **Klassencode** (ohne E-Mail), Spielstand wird automatisch gespeichert, Reiter „Klasse“ zeigt die Klasse auf der Weltkarte (nur Codenamen) |
-| Lehrkraft | registriert sich mit Antrag, legt nach **Freischaltung durch den Admin** Klassen an, sieht die **Live-Einsatzzentrale**, setzt Passwörter zurück, entfernt oder löscht Konten |
+| Lehrkraft | registriert sich mit Antrag, legt nach **Freischaltung durch den Admin** Klassen an, sieht die **Live-Einsatzzentrale**, ändert bei Lernenden **Benutzername, Codename, Figur und Klasse** (✏️ Bearbeiten), setzt Passwörter zurück, entfernt oder löscht Konten |
 | Admin | das Konto mit dem Benutzernamen aus `ADMIN_BENUTZERNAME`. Schaltet Lehrkräfte frei (`/admin`) |
 
 ## Auf Vercel einrichten (einmalig)
@@ -39,6 +39,7 @@ npm run dev                  # http://localhost:3000
 - `app/api/**` – Registrierung, Spielstand, Rangliste, Klassen, Lernende, Admin, Konto; `app/api/auth/[...all]` ist Better Auth
 - `app/**/page.tsx` – Start, Anmelden, Registrieren, Konto, Lehrkraft, Klasse, Admin, Datenschutz/Impressum (Platzhalter)
 - `db/migrations/*.sql` – eigene Tabellen (`klasse`, `mitgliedschaft`, `spielstand`), jede Datei läuft genau einmal
+- Ändert die Lehrkraft Codename oder Figur, steht die Änderung sofort in der DB und zusätzlich in `spielstand.vorgabe`. Ein gerade offenes Spiel bekommt sie beim nächsten Speichern als Antwort, übernimmt sie (`sync.js`) und schickt sie danach mit. Dann wird die Vorgabe geleert.
 - Test: `cd ../werkzeuge && TEST_DATABASE_URL=postgres://…/osi_test npm run test:online` (vorher hier `npm run build`). **Leert die Test-Datenbank.**
 
 ## Datenschutz

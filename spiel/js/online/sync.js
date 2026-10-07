@@ -36,14 +36,27 @@
     if (G.save && G.renderTopbar) G.renderTopbar();
   }
 
+  // Die Lehrkraft hat Codename oder Figur geändert: übernehmen und beim nächsten Speichern mitschicken
+  function vorgabeUebernehmen(v) {
+    const duo = G.save && G.save.duo;
+    if (!duo) return;
+    if (typeof v.codename === 'string') duo.codename = v.codename;
+    if (typeof v.avatar === 'string' && Kit.avatars.liste.some(a => a.id === v.avatar)) duo.avatar = v.avatar;
+    O.puffer(G.save);
+    O.speichern(G.save);
+    if (G.view === 'hub') G.render(); else if (G.renderTopbar) G.renderTopbar(); // mitten in einer Aufgabe nichts neu aufbauen
+    G.toast(`✏️ <b>Eure Lehrkraft hat euer Profil geändert.</b><br>Ihr seid jetzt Duo ${Kit.util.esc(duo.codename)}.`, 4200, 'ok');
+  }
+
   async function senden() {
     if (!offen || laeuft) return;
     const save = offen;
     offen = null; laeuft = true;
     status('laeuft');
     try {
-      await json(API + '/spielstand', { method: 'PUT', body: nutzlast(save) });
+      const r = await json(API + '/spielstand', { method: 'PUT', body: nutzlast(save) });
       versuche = 0;
+      if (r.vorgabe) vorgabeUebernehmen(r.vorgabe);
       status(offen ? 'laeuft' : 'ok');
     } catch (e) {
       if (e.message === '401') return;
