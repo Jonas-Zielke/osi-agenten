@@ -227,7 +227,7 @@
 
   // ---------------------------------------------------------------- Übungsmodus („Nochmal üben“)
   // Der erste Durchgang bleibt maßgeblich. Übungen geben keine Punkte und ziehen keine ab.
-  const UEBBAR = ['quiz', 'sort', 'kapsel', 'anklage'];
+  const UEBBAR = ['quiz', 'sort', 'kapsel', 'anklage', 'interaktiv'];
   function uebungStarten(e, st) {
     G.uebung = { stepId: st.id, items: {}, fertig: false };
     A.play('klick');

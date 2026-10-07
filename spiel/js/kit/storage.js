@@ -138,6 +138,7 @@
         const add = (id, titel, extra) => liste.push(Object.assign({ id, titel, einsatz: e.id, step: st.id, bonus: !!st.bonus }, extra || {}));
         if (st.fragen) st.fragen.forEach(f => add(f.id, f.frage || f.text || st.titel, { optionen: f.optionen }));
         if (st.items) st.items.forEach(it => add(it.id, (st.titel ? st.titel + ': ' : '') + it.text));
+        if (st.aufgaben) st.aufgaben.forEach(a => add(a.id, (st.titel ? st.titel + ': ' : '') + a.text));
         if (st.phasen) st.phasen.forEach(ph => add(ph.id, (st.titel ? st.titel + ': ' : '') + ph.titel, { optionen: ph.optionen && ph.optionen.map(o => o.label), keys: ph.optionen && ph.optionen.map(o => o.key) }));
       });
     });

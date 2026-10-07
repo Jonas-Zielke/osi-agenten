@@ -94,6 +94,10 @@ const { browser, seite, klick, sleep, shot } = require('./lib');
           if (!(await page.evaluate(id => OSIGame.save.verhoer[OSIGame.save.duo.agenten[0]].a[id].wn, vq[1].id))) fehler.push('„Weiß ich nicht“ wird nicht gekennzeichnet');
           await page.screenshot({ path: shot(st.id + '_fertig'), fullPage: true });
           await klick(page, '#st-weiter');
+        } else if (st.type === 'interaktiv') {
+          // eigene Interaktion: der Inhalt bringt mit loesen(el, api) seinen eigenen Lösungsweg mit
+          await page.evaluate(() => OSIGame.interaktiv.loesen()); await sleep(80);
+          await klick(page, '#st-weiter');
         } else if (st.type === 'urkunde') {
           await sleep(300);
           await page.screenshot({ path: shot(st.id), fullPage: true });

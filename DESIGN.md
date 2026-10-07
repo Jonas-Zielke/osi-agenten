@@ -38,6 +38,7 @@ Das Spiel erarbeitet das OSI-Modell an einem durchgehenden Fall. Es deckt keine 
   - Die Begründung steht in der Erklärung nach dem Lösen.
   - Die Frage enthält keine Zaunpfähle.
 - **Belegt vs. vermutet:** Fragen trennen klar, was ein Dokument belegt und was nur Indiz oder Möglichkeit ist. Dokumente zeigen Rohdaten ohne fertige Auswertung. Keine trivialen Rechen- oder Zeitvergleichsaufgaben. Zeugenaussagen sind realistisch ungenau („gegen halb drei“), exakte Zeiten stehen nur in Dokumenten.
+- Interaktive Schritte (Typ `interaktiv`) folgen denselben Regeln wie Aufgaben: nur Vermitteltes, keine hervorgehobenen Lösungen, Bausteine und Tokens des Designsystems.
 - Die Beweiskette läuft über Erkennungsmerkmale, Zeitspuren, Protokolle und Zuordnung, nie über die Funktionsweise eines Angriffs.
 - TLS gilt im Spiel als L6 **oder** L5, weil die Literatur uneinheitlich ist (Hinweis in der HTTP-Lektion). Sortierer und Schichtfragen erlauben dafür mehrere richtige Schichten (`ziel`/`richtig` als Liste).
 - Generisches Maskulinum ist erlaubt, z. B. in Kalles Sprüchen. Verboten sind nur Gendersternchen.
@@ -113,6 +114,7 @@ Das Spiel erarbeitet das OSI-Modell an einem durchgehenden Fall. Es deckt keine 
 ## Gamification
 - Punkte: 1. Versuch voll, dann 50/30/20 %, je Tipp −20 %, nie 0. Kein Game Over, kein Zeitdruck außer in der freiwilligen Zeit-Challenge.
 - Zeit-Challenge: Nach einem Fehler steht die Uhr 2,5 s. Es läuft nur ein Durchgang gleichzeitig. Angezeigt wird „Richtige“. Begriffe aus späteren Einsätzen sind als Vorgeschmack erlaubt.
+  - Je Begriff genau eine Schicht und höchstens 30 Zeichen. Nichts, was nur angeteasert wird. Regeln in [`docs/inhalte.md`](docs/inhalte.md).
 - „Nochmal üben“ für erledigte Fragen-, Sortier- und Puzzle-Schritte:
   - Der erste Durchgang bleibt maßgeblich, Übung gibt und kostet keine Punkte.
   - Fehlerfrei und ohne Tipp = ⭐ „gemeistert“, 5× ⭐ = Abzeichen „Trainingsfleißig“.
