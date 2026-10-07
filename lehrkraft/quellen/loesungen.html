@@ -110,15 +110,7 @@
   <li>Frage 3 (zwei DNS-Antworten) greift „belegt vs. vermutet“ wieder auf: Wer „Fälschung“ wählt, schließt zu schnell.</li>
   <li>Das Verhör ist nicht gegen Wiederholung abgesichert (keine Note). Auffällig kurze Dauer oder mehrere Abgaben desselben Spielstands im Blick behalten.</li>
 </ul>
-<script src="../../spiel/content/meta.js"></script>
-<script src="../../spiel/content/e0.js"></script>
-<script src="../../spiel/content/e1.js"></script>
-<script src="../../spiel/content/e2.js"></script>
-<script src="../../spiel/content/e3.js"></script>
-<script src="../../spiel/content/e4.js"></script>
-<script src="../../spiel/content/e5.js"></script>
-<script src="../../spiel/content/e6.js"></script>
-<script src="../../spiel/content/verhoer.js"></script>
+<script src="../../spiel/content/inhalte.js"></script>
 <script>
   const OSI = window.OSI;
   const strip = s => String(s == null ? '' : s).replace(/<(?!\/?(b|i|code)\b)[^>]+>/g, '').replace(/\s+/g, ' ').trim();
@@ -159,6 +151,10 @@
           else a = strip(q.optionen[q.richtig]);
           html += `<tr class="q"><td><b>${j + 1}. [${q.bereich}]</b> ${q.ticket ? strip(q.ticket) + '<br>' : ''}${strip(q.frage)}${q.kontext ? `<pre style="font-size:8pt;margin:4px 0 0">${q.kontext.replace(/<[^>]+>/g, '').trim()}</pre>` : ''}</td><td class="a">${a}</td></tr>`;
         });
+        html += '</table>';
+      } else if (st.type === 'interaktiv') {
+        html += `<h3>Schritt ${nr}: ${st.titel} (interaktiv)</h3><table>`;
+        st.aufgaben.forEach(a => { html += `<tr class="q"><td>${strip(a.text)}</td><td class="a">${a.loesung || ''}</td></tr>`; });
         html += '</table>';
       } else if (st.type === 'kapsel') {
         html += `<h3>Schritt ${nr}: ${st.titel}</h3><table>`;

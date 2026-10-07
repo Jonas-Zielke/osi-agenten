@@ -10,8 +10,8 @@
   const Kit = window.OSIKit = window.OSIKit || {};
   const { esc } = Kit.util;
 
-  const TYP_ICON = { story: '🎬', lesson: '📖', quiz: '❓', sort: '🗂️', kapsel: '🧩', sealed: '★', ende: '🏁', anklage: '⚖️', verhoer: '🕵️', urkunde: '🏅' };
-  const TYP_NAME = { story: 'Handlung', lesson: 'Lektion', quiz: 'Aufgaben', sort: 'Sortieren', kapsel: 'Puzzle', sealed: 'Bonus-Akte', ende: 'Abschluss', anklage: 'Anklage', verhoer: 'Verhör', urkunde: 'Urkunde' };
+  const TYP_ICON = { story: '🎬', lesson: '📖', quiz: '❓', sort: '🗂️', kapsel: '🧩', sealed: '★', ende: '🏁', anklage: '⚖️', verhoer: '🕵️', urkunde: '🏅', interaktiv: '🕹️' };
+  const TYP_NAME = { story: 'Handlung', lesson: 'Lektion', quiz: 'Aufgaben', sort: 'Sortieren', kapsel: 'Puzzle', sealed: 'Bonus-Akte', ende: 'Abschluss', anklage: 'Anklage', verhoer: 'Verhör', urkunde: 'Urkunde', interaktiv: 'Mitmachen' };
   const farbe = e => `var(--${e.farbe || 'brand'})`;
 
   const MASSE = {

@@ -6,8 +6,7 @@ const path = require('path');
 const { ROOT } = require('./lib');
 
 global.window = {};
-const html = fs.readFileSync(path.join(ROOT, 'spiel/index.html'), 'utf8');
-[...html.matchAll(/<script src="(content\/[^"]+)"/g)].forEach(m => require(path.join(ROOT, 'spiel', m[1])));
+require(path.join(ROOT, 'spiel/content/inhalte.js')).forEach(d => require(path.join(ROOT, 'spiel/content', d)));
 require(path.join(ROOT, 'spiel/js/kit/storage.js'));
 const OSI = window.OSI, S = window.OSIStore;
 global.btoa = s => Buffer.from(s, 'binary').toString('base64');

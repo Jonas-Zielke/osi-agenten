@@ -24,6 +24,9 @@
 
   window.addEventListener('DOMContentLoaded', () => {
     G.lokalOk = S.localAvailable();
+    // Hilfe beim Schreiben von Inhalten: Fehler in spiel/content/ stehen sofort in der Browser-Konsole (F12)
+    const inhaltsfehler = window.OSI.pruefen ? window.OSI.pruefen() : [];
+    if (inhaltsfehler.length) console.error('OSI-Agenten – Fehler in den Inhalten:\n  ' + inhaltsfehler.join('\n  '));
     if (G.online) G.online.start(); // Online-Fassung: Konto und Spielstand kommen vom Server
     else G.renderStart();
   });

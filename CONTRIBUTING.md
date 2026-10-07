@@ -34,7 +34,11 @@ Diese Datei ist die verbindliche Grundlage für alle Beiträge, von Menschen wie
 ## Aufbau
 - `spiel/` – das Spiel selbst. Klassische Skripte ohne Build-Schritt und ohne Module, Ladereihenfolge in `spiel/index.html`.
   - `content/meta.js`: Version, Figuren der Story, Ränge, Abzeichen (je Abzeichen `form`, `farbe` und `motiv` für das SVG), Challenge, Einsatzliste (je Einsatz `farbe` und `icon` für die Karte)
+  - `content/inhalte.js`: Inhaltsverzeichnis – die einzige Liste der geladenen Inhaltsdateien (Spiel, Einsatzzentrale, Lösungs-PDF und Tests lesen sie)
+  - `content/meta.js`: Version, Figuren der Story, Ränge, Abzeichen, Challenge, Einsatzliste (je Einsatz `farbe` und `icon` für die Karte)
+  - `content/api.js`: Helfer für Inhaltsdateien (`OSI.schritte`, `OSI.challengeBegriffe`, `OSI.L` …) und die Inhaltsprüfung `OSI.pruefen()`
   - `content/eN.js`: ein Einsatz je Datei
+  - Anleitung zum Schreiben von Inhalten: [`docs/inhalte.md`](docs/inhalte.md)
   - `js/kit/` – Baukasten, den Spiel **und** Einsatzzentrale nutzen (`window.OSIKit`, `window.OSIStore`, `window.OSIAudio`), ohne Abhängigkeit vom Spielzustand:
     - `storage.js`: Spielstand-Kodierung mit Prüfsumme, Migration alter Spielstände (auch unter Node für die Werkzeuge)
     - `util.js`, `theme.js` (Hell/Dunkel), `audio.js`, `fx.js` (Animationen, beachtet „Bewegung reduzieren“)
@@ -43,7 +47,7 @@ Diese Datei ist die verbindliche Grundlage für alle Beiträge, von Menschen wie
     - `abzeichen.js`: die Abzeichen als selbst gezeichnetes SVG (Form je Art, Farbe als Token, ein Motiv je Abzeichen)
     - `map.js`: Kletterkarten – `welt` (Station je Einsatz, im Spiel senkrecht, in der Zentrale waagerecht), `pfad` (Schritte eines Einsatzes) und `spalten` (alle Schritte als Türme), Figuren mit Lauf-Animation
   - `js/game/` – das Spiel (`window.OSIGame`): `core.js` (Zustand, Punkte, Übungsmodus, Navigation), `shell.js` (Kopfleiste, Dialoge, Lehrkraft-Modus), `screens.js` (Start, Karte, Schritt-Rahmen), `main.js` (Router, Tastatur)
-  - `js/steps/` – Renderer der Schritt-Typen: `common.js` (gemeinsame Bausteine), `story.js` (story, lesson, sealed), `quiz.js` (quiz mit mc/layer/pick/multi/eingabe/meldung, anklage), `sort.js` (sort, kapsel), `verhoer.js`, `ende.js` (ende, urkunde)
+  - `js/steps/` – Renderer der Schritt-Typen: `common.js` (gemeinsame Bausteine), `story.js` (story, lesson, sealed), `quiz.js` (quiz mit mc/layer/pick/multi/eingabe/meldung, anklage), `sort.js` (sort, kapsel), `verhoer.js`, `ende.js` (ende, urkunde), `interaktiv.js` (eigene Interaktionen aus den Inhalten)
   - `js/tools/` – `terminal.js` (simuliertes Terminal), `wireshark.js` (Ansicht und Filter-Parser), `challenge.js` (Zeit-Challenge)
   - `css/` – Designsystem: `tokens.css` (alle Farben, hell und dunkel), `base.css`, `components.css`, `map.css`, `steps.css`, `tools.css`, `print.css`
 - `lehrkraft/einsatzzentrale.html` mit `zentrale.js`/`zentrale.css` – Auswertung der `.osiagent`-Dateien (Karte mit allen Figuren, Beamer, Spielstände, Aufgaben-Analyse, Abschlussverhör, CSV).
@@ -72,11 +76,12 @@ npm install          # nur beim ersten Mal
 npm run release      # Tests + PDFs + ZIP – vor jedem Commit
 ```
 
-- `npm test` spielt alle freigegebenen Einsätze durch und prüft:
+- `npm test` prüft zuerst die Inhalte (`npm run inhalte`, ohne Browser), spielt dann alle freigegebenen Einsätze durch und prüft:
   - die Werkzeuge (Terminal-Befehle, Wireshark-Filter)
   - Kletterkarte und Figuren (Spiel und Einsatzzentrale)
   - die Antwortlängen (die richtige Antwort darf nicht auffällig länger sein)
   - Übungsmodus, Zeit-Challenge und Einsatzzentrale
+  - interaktive Schritte am Beispiel `docs/beispiele/interaktiv-frame.js`
 - `npm run test:online` prüft die Online-Fassung von Anmeldung bis Live-Zentrale gegen eine **Test-Datenbank**. Es braucht `TEST_DATABASE_URL` (Datenbankname mit „test“, wird geleert) und vorher `npm run build` in `web/`. Ohne die Variable wird der Test übersprungen.
 
   Screenshots landen in `werkzeuge/shots/`. Bei Änderungen an der Oberfläche bitte ansehen.
@@ -94,11 +99,14 @@ Nicht zu verwechseln: `npm run release` baut lokal Tests, PDFs und ZIP. Ein **Gi
 
 In den Release-Notizen steht, was sich für Lernende und Lehrkräfte ändert. Ältere Spielstände laden weiter (siehe Grundregeln).
 
-## Neuen Einsatz ergänzen
+## Neuen Einsatz oder neue Inhalte ergänzen
+Ausführlich mit Beispielen: [`docs/inhalte.md`](docs/inhalte.md).
 1. `spiel/content/eN.js` anlegen (Muster: `e1.js`) und in `meta.js` mit `status: 'offen'`, `farbe` und `icon` eintragen. Er erscheint dann als neues Kapitel auf der Karte.
-2. Script-Tag in `spiel/index.html`, `lehrkraft/einsatzzentrale.html` und `lehrkraft/quellen/loesungen.html` ergänzen.
-3. Neuer Schritt-Typ? Renderer in `spiel/js/steps/` (eigene Datei mit Script-Tag in `spiel/index.html`), Symbol und Name in `TYP_ICON`/`TYP_NAME` (`spiel/js/kit/map.js`) **und** Behandlung in `werkzeuge/test-durchlauf.js` ergänzen.
-4. Debriefing-Impulse in `lehrkraft/quellen/loesungen.html` ergänzen.
+2. Die Datei in `spiel/content/inhalte.js` eintragen. Weitere Stellen müssen nicht angepasst werden. Zusatzdateien für bestehende Einsätze nutzen `OSI.schritte(…)` und stehen dort hinter der Datei des Einsatzes.
+3. `npm run inhalte` (in `werkzeuge/`) prüft IDs, Schritt-Typen, Antworten und Challenge-Begriffe in Sekunden.
+4. Eigene Interaktion? Schritt-Typ `interaktiv` mit `start(el, api)` und `loesen(el, api)`. Vorlage: `docs/beispiele/interaktiv-frame.js`.
+5. Ganz neuer Schritt-Typ (selten nötig)? Renderer in `spiel/js/steps/` (eigene Datei mit Script-Tag in `spiel/index.html`) anlegen. Dazu den Typ in `OSI.SCHRITT_TYPEN` (`spiel/content/api.js`) eintragen, Symbol und Name in `TYP_ICON`/`TYP_NAME` (`spiel/js/kit/map.js`) ergänzen und den Typ in `werkzeuge/test-durchlauf.js` behandeln.
+6. Debriefing-Impulse in `lehrkraft/quellen/loesungen.html` ergänzen.
 
 ## Bilder (optional)
 Die fertigen Bilder liegen im Repo. Neue Bilder im selben Stil erzeugt `werkzeuge/bild.ps1` über ein lokales ComfyUI mit FLUX.2 [klein] 9B (nur das unveränderte Basismodell). Der Stil-Prompt steht im Skript, die Server-Adresse kommt aus `$env:COMFYUI_URL`. Danach mit Pillow als JPG nach `spiel/img/` verkleinern. Lichtquellen und Bildlogik prüfen.
