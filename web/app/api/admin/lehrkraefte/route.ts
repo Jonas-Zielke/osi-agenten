@@ -1,14 +1,7 @@
 // Admin: Lehrkraft-Anträge freischalten, ablehnen (Konto löschen) oder Rechte entziehen
-import { auth } from '@/lib/auth';
 import { abfrage, pool } from '@/lib/db';
-import { benutzer, fehler, istAdmin } from '@/lib/rechte';
-
-async function adminOderFehler() {
-  const b = await benutzer();
-  if (!b) return fehler(401, 'Bitte anmelden.');
-  if (!istAdmin(b)) return fehler(403, 'Nur für den Admin.');
-  return b;
-}
+import { adminOderFehler, fehler } from '@/lib/rechte';
+import { kontoLoeschen } from '@/lib/verwaltung';
 
 export async function GET() {
   const b = await adminOderFehler();
@@ -26,7 +19,7 @@ export async function POST(req: Request) {
   if (!u) return fehler(404, 'Lehrkraft nicht gefunden.');
   if (aktion === 'freischalten') await pool.query(`update "user" set "lehrkraftStatus" = 'frei' where id = $1`, [u.id]);
   else if (aktion === 'entziehen') await pool.query(`update "user" set "lehrkraftStatus" = 'beantragt' where id = $1`, [u.id]);
-  else if (aktion === 'ablehnen') await (await auth.$context).internalAdapter.deleteUser(u.id);
+  else if (aktion === 'ablehnen') await kontoLoeschen(u.id);
   else return fehler(400, 'Unbekannte Aktion.');
   return Response.json({ ok: true });
 }

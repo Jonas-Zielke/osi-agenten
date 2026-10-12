@@ -28,3 +28,17 @@ export function Parade({ ids }: { ids: string[] }) {
     </div>
   );
 }
+
+// Auswahl aus allen 15 Figuren (wie beim Spielstart). Lädt die Figuren erst, wenn sie angezeigt wird.
+export function FigurWahl({ wert, onWahl }: { wert: string | null; onWahl: (id: string) => void }) {
+  const [figuren, setFiguren] = useState<{ id: string; name: string; svg: string }[]>([]);
+  useEffect(() => { kit().then(k => setFiguren(k.avatars.liste.map(a => ({ id: a.id, name: a.name, svg: k.avatars.svg(a.id, { titel: false }) })))); }, []);
+  return (
+    <div className="av-picker" role="radiogroup" aria-label="Figur wählen">
+      {figuren.map(a => (
+        <button key={a.id} type="button" role="radio" className="av-wahl" data-av={a.id} aria-checked={a.id === wert} title={a.name}
+          onClick={() => onWahl(a.id)}><span dangerouslySetInnerHTML={{ __html: a.svg }} /><span>{a.name}</span></button>
+      ))}
+    </div>
+  );
+}

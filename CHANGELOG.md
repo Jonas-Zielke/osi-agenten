@@ -46,7 +46,11 @@ Zusätzlich zur Lite-Version (ZIP, Doppelklick, GitHub Pages ohne Konto) gibt es
   - sehen die **Live-Einsatzzentrale** (aktualisiert alle 20 Sekunden),
   - setzen Passwörter zurück und entfernen oder löschen Konten,
   - ändern bei Lernenden **Benutzername, Codename, Figur und Klasse**.
-- **Admin:** Das Konto aus `ADMIN_BENUTZERNAME` schaltet Lehrkraft-Anträge frei.
+- **Admin:** Das Konto aus `ADMIN_BENUTZERNAME` verwaltet im **Admin-Bereich** (`/admin`) alles:
+  - **Konten:** suchen und filtern, direkt anlegen (mit Startpasswort), Benutzername, Codename, Figur, Rolle und Klasse ändern, Passwort setzen, auf allen Geräten abmelden, löschen. Lehrkraft-Anträge freischalten. Es bleibt immer mindestens ein Admin.
+  - **Klassen:** alle Klassen aller Lehrkräfte; anlegen, einer anderen Lehrkraft übertragen, neuer Klassencode, Registrierung sperren, löschen (wahlweise samt den Konten der Lernenden, z. B. am Schuljahresende)
+  - **Spielstände:** alle ansehen (auch die Rohdaten), als `.osiagent` oder JSON herunterladen, durch eine Datei ersetzen oder zurücksetzen. Die Person wird dabei abgemeldet, damit ein offenes Spiel den alten Stand nicht zurückschreibt.
+  - **Live-Zentrale aller Klassen** und eine **Sicherung** aller Konten (ohne Passwörter), Klassen und Spielstände als JSON
 - **Datenschutz:**
   - gespeichert werden nur Benutzername, Passwort-Hash, Klassenzuordnung und Spielstand
   - „Konto löschen“ entfernt alles

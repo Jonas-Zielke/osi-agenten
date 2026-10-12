@@ -18,11 +18,7 @@
   }
 
   // Kennzahlen für Rangliste und Zentrale – der Server speichert sie neben dem Spielstand
-  function meta(save) {
-    const f = Kit.progress.front(save);
-    return { codename: save.duo.codename, avatar: save.duo.avatar, punkte: Kit.progress.punkte(save), front: f ? f.st.id : null, fall: Kit.progress.fallFortschritt(save) };
-  }
-  const nutzlast = save => JSON.stringify({ daten: save, meta: meta(save) });
+  const nutzlast = save => JSON.stringify({ daten: save, meta: Kit.progress.kennzahlen(save) });
 
   // Puffer im Browser (je Konto): sichert bei Funkloch und wird beim nächsten Start nachgeholt
   const pufferKey = () => 'osiagenten.online.' + O.benutzer.id;
@@ -83,8 +79,10 @@
         O.istLehrkraft = ich.benutzer.istLehrkraft;
         const r = await json(API + '/spielstand');
         let save = r.daten ? S.migrate(r.daten) : null;
-        // Der neuere Stand gewinnt (z. B. wenn beim letzten Mal das Netz weg war)
-        const lokal = pufferLesen();
+        // Der neuere Stand gewinnt (z. B. wenn beim letzten Mal das Netz weg war) – außer der Admin hat den Stand
+        // seitdem zurückgesetzt oder ersetzt: Dann gilt kein älterer Puffer mehr
+        let lokal = pufferLesen();
+        if (lokal && r.verworfen && !(Date.parse(lokal.aktualisiert) > Date.parse(r.verworfen))) lokal = null;
         if (lokal && (!save || lokal.id === save.id) && (!save || Date.parse(lokal.aktualisiert) > Date.parse(save.aktualisiert))) save = lokal;
         if (save) {
           save.duo.agenten = [O.benutzer.name];

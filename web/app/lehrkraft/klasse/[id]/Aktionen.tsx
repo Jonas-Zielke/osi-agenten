@@ -2,7 +2,7 @@
 import { useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { meldungVon, senden } from '../../../_teile/api';
-import { kit } from '../../../_teile/Figuren';
+import { FigurWahl } from '../../../_teile/Figuren';
 
 export function KlasseAktionen({ id, aktiv }: { id: string; aktiv: boolean }) {
   const router = useRouter();
@@ -49,14 +49,13 @@ export type LernendDaten = { id: string; username: string; codename: string | nu
 export function LernendBearbeiten({ klasse, lernend, klassen }: { klasse: string; lernend: LernendDaten; klassen: { id: string; name: string }[] }) {
   const router = useRouter();
   const dialog = useRef<HTMLDialogElement>(null);
-  const [figuren, setFiguren] = useState<{ id: string; name: string; svg: string }[]>([]);
+  const [offen, setOffen] = useState(false);
   const [avatar, setAvatar] = useState(lernend.avatar);
   const [meldung, setMeldung] = useState('');
   const gespielt = lernend.codename != null;
 
   function oeffnen() {
-    setAvatar(lernend.avatar); setMeldung('');
-    if (gespielt && !figuren.length) kit().then(k => setFiguren(k.avatars.liste.map(a => ({ id: a.id, name: a.name, svg: k.avatars.svg(a.id, { titel: false }) }))));
+    setAvatar(lernend.avatar); setMeldung(''); setOffen(true);
     dialog.current?.showModal();
   }
   async function speichern(ev: React.FormEvent<HTMLFormElement>) {
@@ -72,7 +71,7 @@ export function LernendBearbeiten({ klasse, lernend, klassen }: { klasse: string
   return (
     <>
       <button className="btn sec klein" data-aktion="bearbeiten" onClick={oeffnen}>✏️ Bearbeiten</button>
-      <dialog ref={dialog} className="card dialog-bearbeiten" aria-label={`${lernend.username} bearbeiten`}>
+      <dialog ref={dialog} className="card dialog-bearbeiten" aria-label={`${lernend.username} bearbeiten`} onClose={() => setOffen(false)}>
         <form className="formular" onSubmit={speichern}>
           <h3>✏️ {lernend.username} bearbeiten</h3>
           <label htmlFor={`bn-${lernend.id}`}>Benutzername (für die Anmeldung)</label>
@@ -83,12 +82,7 @@ export function LernendBearbeiten({ klasse, lernend, klassen }: { klasse: string
               <label htmlFor={`cn-${lernend.id}`}>Codename im Spiel (sehen alle in der Rangliste)</label>
               <input id={`cn-${lernend.id}`} name="codename" defaultValue={lernend.codename ?? ''} required maxLength={24} autoComplete="off" />
               <label>Figur</label>
-              <div className="av-picker" role="radiogroup" aria-label="Figur wählen">
-                {figuren.map(a => (
-                  <button key={a.id} type="button" role="radio" className="av-wahl" data-av={a.id} aria-checked={a.id === avatar} title={a.name}
-                    onClick={() => setAvatar(a.id)}><span dangerouslySetInnerHTML={{ __html: a.svg }} /><span>{a.name}</span></button>
-                ))}
-              </div>
+              {offen && <FigurWahl wert={avatar} onWahl={setAvatar} />}
             </>
           ) : <p className="small muted">Codename und Figur lassen sich ändern, sobald das Spiel einmal gestartet wurde.</p>}
           {klassen.length > 1 && (

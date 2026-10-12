@@ -2,6 +2,7 @@
 // Das Spiel bleibt dabei unverändert; nur die Online-Fassung bekommt js/online/sync.js (vor js/game/main.js)
 // und die Zentrale zentrale-online.js. So gibt es EINEN Spielcode für Lite (Datei/ZIP/Pages) und Online.
 import fs from 'node:fs';
+import { createRequire } from 'node:module';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -19,6 +20,10 @@ function ersetze(datei, alt, neu) {
 fs.rmSync(ziel('spiel'), { recursive: true, force: true });
 fs.cpSync(path.join(repo, 'spiel'), ziel('spiel'), { recursive: true });
 ersetze(path.join(ziel('spiel'), 'index.html'), '<script src="js/game/main.js"></script>', '<script src="js/online/sync.js"></script>\n  <script src="js/game/main.js"></script>');
+// Liste der Inhaltsdateien als JSON: Der Admin-Bereich lädt damit die Inhalte nach (app/_teile/spielkit.ts) – inhalte.js selbst
+// fügt sie per document.write ein, und das geht nur beim ersten Laden einer Seite
+const inhalte = createRequire(import.meta.url)(path.join(repo, 'spiel', 'content', 'inhalte.js'));
+fs.writeFileSync(path.join(ziel('spiel'), 'content', 'inhalte.json'), JSON.stringify(inhalte));
 
 // Einsatzzentrale + PDFs für Lehrkräfte
 fs.rmSync(ziel('lehrkraft'), { recursive: true, force: true });

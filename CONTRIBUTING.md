@@ -55,7 +55,7 @@ Diese Datei ist die verbindliche Grundlage für alle Beiträge, von Menschen wie
 - `werkzeuge/` – Tests, PDF- und ZIP-Erzeugung, optionales Bildskript.
 - `quellbilder/` – Original-PNGs. `spiel/img/` – verkleinerte JPGs (640 px, Qualität 82).
 - `index.html` – Startseite der Lite-Version auf GitHub Pages (Pages veröffentlicht `main` ab Root, `.nojekyll` daneben).
-- `web/` – Online-Fassung für Vercel: Next.js, Postgres (Neon), Better Auth mit Benutzername + Passwort, Klassen mit Klassencode, Live-Einsatzzentrale. Einrichtung und Aufbau in [`web/README.md`](web/README.md).
+- `web/` – Online-Fassung für Vercel: Next.js, Postgres (Neon), Better Auth mit Benutzername + Passwort, Klassen mit Klassencode, Live-Einsatzzentrale, Admin-Bereich für Konten, Klassen und Spielstände. Einrichtung und Aufbau in [`web/README.md`](web/README.md).
   - Das Spiel spricht mit dem Server nur über `OSIGame.online` (gesetzt von `spiel/js/online/sync.js`). In der Lite-Version ist es `null`.
   - Speichern läuft immer über `OSIGame.sichern()`.
 
@@ -82,7 +82,7 @@ npm run release      # Tests + PDFs + ZIP – vor jedem Commit
   - die Antwortlängen (die richtige Antwort darf nicht auffällig länger sein)
   - Übungsmodus, Zeit-Challenge und Einsatzzentrale
   - interaktive Schritte am Beispiel `docs/beispiele/interaktiv-frame.js`
-- `npm run test:online` prüft die Online-Fassung von Anmeldung bis Live-Zentrale gegen eine **Test-Datenbank**. Es braucht `TEST_DATABASE_URL` (Datenbankname mit „test“, wird geleert) und vorher `npm run build` in `web/`. Ohne die Variable wird der Test übersprungen.
+- `npm run test:online` prüft die Online-Fassung von Anmeldung über Live-Zentrale bis Admin-Bereich gegen eine **Test-Datenbank**. Es braucht `TEST_DATABASE_URL` (Datenbankname mit „test“, wird geleert) und vorher `npm run build` in `web/`. Ohne die Variable wird der Test übersprungen.
 
   Screenshots landen in `werkzeuge/shots/`. Bei Änderungen an der Oberfläche bitte ansehen.
 - `npm run pdf` erzeugt die PDFs neu. Das ist nach jeder Inhaltsänderung nötig, weil das Lösungs-PDF aus den Spielinhalten entsteht.
