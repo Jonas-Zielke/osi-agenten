@@ -26,3 +26,34 @@
 .dialog-bearbeiten h3 { margin-top: 0; }
 .dialog-bearbeiten .av-picker { margin-top: 6px; }
 .t td.nowrap { white-space: nowrap; }
+
+/* Admin-Bereich */
+.seite.breit { max-width: 1240px; }
+.admin-nav { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 18px; }
+.admin-nav .hub-tab { text-decoration: none; }
+select, input[type=search] {
+  width: 100%; padding: 11px 12px; border: 2px solid var(--line); border-radius: var(--r-s);
+  background: var(--surface-2); color: var(--text); font-weight: 700;
+}
+select:focus, input[type=search]:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 4px var(--blue-soft); background: var(--surface); }
+.filter { display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: flex-end; }
+.filter > div { flex: 1 1 200px; }
+.filter > .btnrow { flex: 0 0 auto; margin: 0 0 2px; }
+.chip-rolle { display: inline-block; padding: 2px 10px; border-radius: var(--r-pill); font-size: .76rem; font-weight: 900; white-space: nowrap; background: var(--green-soft); color: var(--green-ink); }
+.chip-rolle.lehrkraft { background: var(--blue-soft); color: var(--blue-ink); }
+.chip-rolle.beantragt { background: var(--gold-soft); color: var(--gold-ink); }
+.chip-rolle.admin { background: var(--purple-soft); color: var(--purple-ink); }
+.konto-kopf { display: flex; gap: 20px; align-items: center; }
+.konto-figur { flex: 0 0 auto; width: 92px; }
+.fakten { display: grid; grid-template-columns: max-content 1fr; gap: 4px 16px; margin: 8px 0 0; }
+.fakten dt { color: var(--muted); font-weight: 800; }
+.fakten dd { margin: 0; }
+.admin-spalten { display: grid; grid-template-columns: 1.4fr 1fr; gap: 18px; align-items: start; }
+@media (max-width: 860px) { .admin-spalten { grid-template-columns: 1fr; } .konto-kopf { flex-direction: column; align-items: flex-start; } }
+details.roh { margin: 14px 0; }
+details.roh summary { cursor: pointer; font-weight: 800; color: var(--muted); }
+details.roh pre { max-height: 360px; overflow: auto; margin: 8px 0 0; padding: 12px; border-radius: var(--r-s); background: var(--code-bg); color: var(--text); font-size: .78rem; }
+.card.gefahr { border-color: var(--red); box-shadow: 0 var(--kante) 0 var(--red-edge); }
+label.haken { display: flex; gap: 8px; align-items: center; color: var(--text); }
+.zeile.eng { flex-wrap: nowrap; }
+.dialog-bearbeiten hr { margin: 20px 0 12px; border: 0; border-top: 2px solid var(--line); }

@@ -1,7 +1,7 @@
 // Klassen der Lehrkraft: auflisten und anlegen (mit eindeutigem Klassencode)
 import { abfrage } from '@/lib/db';
 import { fehler, istAdmin, lehrkraftOderFehler } from '@/lib/rechte';
-import { klassencode } from '@/lib/werte';
+import { klasseAnlegen } from '@/lib/verwaltung';
 
 export async function GET() {
   const b = await lehrkraftOderFehler();
@@ -19,13 +19,6 @@ export async function POST(req: Request) {
   const { name } = ((await req.json().catch(() => ({}))) || {}) as { name?: string };
   const n = String(name ?? '').trim().slice(0, 60);
   if (!n) return fehler(400, 'Bitte einen Namen für die Klasse angeben.');
-  for (let i = 0; i < 8; i++) {
-    try {
-      const [k] = await abfrage('insert into klasse (lehrkraft_id, name, code) values ($1, $2, $3) returning id, name, code, aktiv', [b.id, n, klassencode()]);
-      return Response.json({ klasse: k });
-    } catch (e) {
-      if ((e as { code?: string }).code !== '23505') throw e; // Code schon vergeben → neuer Versuch
-    }
-  }
-  return fehler(500, 'Kein freier Klassencode gefunden – bitte nochmal versuchen.');
+  const k = await klasseAnlegen(b.id, n);
+  return k instanceof Response ? k : Response.json({ klasse: k });
 }

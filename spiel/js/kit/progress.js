@@ -74,5 +74,11 @@
     return schrittIndex[id] || null;
   }
 
-  Kit.progress = { einsatzVonStep, einsatz, freigegeben, sichtbar, pflicht, stepDone, einsatzFertig, einsatzFortschritt, einsatzOffen, stepOffen, fallFortschritt, front, punkte, rang, geloest, heute };
+  // Kennzahlen, die die Online-Fassung neben dem Spielstand speichert (Rangliste, Live-Zentrale, Admin)
+  function kennzahlen(save) {
+    const f = front(save);
+    return { codename: save.duo.codename, avatar: save.duo.avatar, punkte: punkte(save), front: f ? f.st.id : null, fall: fallFortschritt(save) };
+  }
+
+  Kit.progress = { einsatzVonStep, einsatz, freigegeben, sichtbar, pflicht, stepDone, einsatzFertig, einsatzFortschritt, einsatzOffen, stepOffen, fallFortschritt, front, punkte, rang, geloest, heute, kennzahlen };
 })();

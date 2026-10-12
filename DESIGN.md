@@ -132,7 +132,7 @@ Das Spiel erarbeitet das OSI-Modell an einem durchgehenden Fall. Es deckt keine 
 - **Online-Fassung:** ein Konto je Person (kein Duo), Kürzel = Benutzername. Reiter **Klasse**: die Figuren der eigenen Klasse auf der Weltkarte und eine Rangliste – nur Codenamen und Figuren, keine Benutzernamen.
 - Einsatzzentrale:
   - Reiter **Karte** mit Umschalter: Weltkarte (Figuren an ihren Stationen), ein einzelner Einsatz (Figuren an ihren Schritten) oder alle Schritte als Türme. Mit Lauf-Animation und Vollbild für den Beamer.
-  - Online gibt es sie **live** je Klasse (aktualisiert alle 20 Sekunden).
+  - Online gibt es sie **live** je Klasse (aktualisiert alle 20 Sekunden), für den Admin auch über alle Klassen.
   - Beamer (Klassenbalken, Top 3, Kategorien) und Lehrkraft-Ansicht (Spielstände, Fehlerquote je Aufgabe, häufigste falsche Antwort, CSV).
 - Lehrkraft-Modus: Strg+Alt+L oder Link „Lehrkraft“ (Passwort siehe README).
 - Ton: nur Web-Audio-Effekte, standardmäßig aus.
